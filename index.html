@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Для любимого 💕</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffe4ec, #ffd1dc);
+            font-family: 'Nunito', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 45px 55px;
+            border-radius: 28px;
+            box-shadow: 0 20px 40px rgba(255, 182, 193, 0.45);
+            animation: fadeIn 1.2s ease;
+            z-index: 2;
+        }
+
+        h1 {
+            color: #ff7aa2;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 22px;
+            color: #d36c8c;
+            margin-bottom: 25px;
+        }
+
+        .buttons {
+            position: relative;
+            height: 110px;
+        }
+
+        button {
+            font-size: 20px;
+            padding: 14px 38px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: scale(1.07);
+            box-shadow: 0 10px 20px rgba(255, 150, 180, 0.4);
+        }
+
+        #yes {
+            background: linear-gradient(135deg, #ff9ebc, #ff6f9f);
+            color: white;
+            left: 25%;
+        }
+
+        #no {
+            background: #ffe3eb;
+            color: #c55b7a;
+            left: 55%;
+        }
+
+        .denied {
+            background: #ff6b81;
+            color: white;
+            font-size: 48px;
+            padding: 40px 60px;
+            border-radius: 25px;
+            animation: shake 0.5s infinite;
+            box-shadow: 0 20px 40px rgba(255, 80, 120, 0.6);
+        }
+
+        .photos {
+            margin-top: 25px;
+        }
+
+        .photos img {
+            max-width: 220px;
+            border-radius: 22px;
+            box-shadow: 0 15px 30px rgba(255, 150, 180, 0.35);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .heart {
+            position: fixed;
+            top: -20px;
+            font-size: 24px;
+            color: #ff8fb3;
+            animation: fall linear forwards;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+                opacity: 0;
+            }
+        }
+
+        @keyframes shake {
+            0% { transform: rotate(0); }
+            25% { transform: rotate(3deg); }
+            50% { transform: rotate(0); }
+            75% { transform: rotate(-3deg); }
+            100% { transform: rotate(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="main">
+    <h1>для любимого 💕</h1>
+    <p>будешь моей валентинкой?</p>
+
+    <div class="buttons">
+        <button id="yes">да</button>
+        <button id="no">нет</button>
+    </div>
+</div>
+
+<script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+
+    noBtn.addEventListener("mouseenter", () => {
+        const x = Math.random() * 220;
+        const y = Math.random() * 70;
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    });
+
+    noBtn.addEventListener("click", () => {
+        document.body.innerHTML = `
+            <div class="denied">ХАХА отказано 😈</div>
+        `;
+
+        document.body.style.display = "flex";
+        document.body.style.justifyContent = "center";
+        document.body.style.alignItems = "center";
+
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
+    });
+
+    yesBtn.addEventListener("click", () => {
+        document.body.innerHTML = `
+            <div class="container">
+                <h1>может это и кринж</h1>
+                <p>но я счастлива</p>
+                <div class="photos">
+                    <img src="photo2.jpg">
+                </div>
+            </div>
+        `;
+    });
+
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = "💗";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
